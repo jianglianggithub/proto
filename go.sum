@@ -1,0 +1,4 @@
+github.com/gogf/gf/contrib/rpc/grpcx/v2 v2.9.0/go.mod h1:hHruehiunmH9FDx35ucCD0ZCvWX1Jh77hDzfzPbJGwE=
+github.com/gogf/gf/v2 v2.9.0/go.mod h1:sWGQw+pLILtuHmbOxoe0D+0DdaXxbleT57axOLH2vKI=
+google.golang.org/grpc v1.64.1/go.mod h1:hiQF4LFZelK2WKaP6W0L92zGHtiQdZxk8CrSdvyjeP0=
+google.golang.org/protobuf v1.34.2/go.mod h1:qYOHts0dSfpeUzUFpOMr/WGzszTmLH+DiWniOlNbLDw=

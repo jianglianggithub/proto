@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package order;
+
+option go_package = "github.com/jianglianggithub/proto/api/order";
+
+
+service OrderInfo{
+  rpc Create(CreateReq) returns (CreateRes) {}
+}
+
+message CreateReq {
+  string Passport = 1; // v: required
+  string Password = 2; // v: required
+  string Nickname = 3; // v: required
+}
+message CreateRes {
+  string Ok = 1; // status
+}
