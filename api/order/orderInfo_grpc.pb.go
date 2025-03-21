@@ -20,7 +20,6 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OrderInfo_Create_FullMethodName  = "/order.OrderInfo/Create"
 	OrderInfo_Create1_FullMethodName = "/order.OrderInfo/Create1"
 )
 
@@ -28,7 +27,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrderInfoClient interface {
-	Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateRes, error)
 	Create1(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateRes, error)
 }
 
@@ -38,16 +36,6 @@ type orderInfoClient struct {
 
 func NewOrderInfoClient(cc grpc.ClientConnInterface) OrderInfoClient {
 	return &orderInfoClient{cc}
-}
-
-func (c *orderInfoClient) Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateRes, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateRes)
-	err := c.cc.Invoke(ctx, OrderInfo_Create_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *orderInfoClient) Create1(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateRes, error) {
@@ -64,7 +52,6 @@ func (c *orderInfoClient) Create1(ctx context.Context, in *CreateReq, opts ...gr
 // All implementations must embed UnimplementedOrderInfoServer
 // for forward compatibility.
 type OrderInfoServer interface {
-	Create(context.Context, *CreateReq) (*CreateRes, error)
 	Create1(context.Context, *CreateReq) (*CreateRes, error)
 	mustEmbedUnimplementedOrderInfoServer()
 }
@@ -76,9 +63,6 @@ type OrderInfoServer interface {
 // pointer dereference when methods are called.
 type UnimplementedOrderInfoServer struct{}
 
-func (UnimplementedOrderInfoServer) Create(context.Context, *CreateReq) (*CreateRes, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-}
 func (UnimplementedOrderInfoServer) Create1(context.Context, *CreateReq) (*CreateRes, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create1 not implemented")
 }
@@ -101,24 +85,6 @@ func RegisterOrderInfoServer(s grpc.ServiceRegistrar, srv OrderInfoServer) {
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&OrderInfo_ServiceDesc, srv)
-}
-
-func _OrderInfo_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OrderInfoServer).Create(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OrderInfo_Create_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrderInfoServer).Create(ctx, req.(*CreateReq))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _OrderInfo_Create1_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -146,10 +112,6 @@ var OrderInfo_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "order.OrderInfo",
 	HandlerType: (*OrderInfoServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Create",
-			Handler:    _OrderInfo_Create_Handler,
-		},
 		{
 			MethodName: "Create1",
 			Handler:    _OrderInfo_Create1_Handler,

@@ -6,7 +6,6 @@ option go_package = "github.com/jianglianggithub/proto/api/order";
 
 
 service OrderInfo{
-  rpc Create(CreateReq) returns (CreateRes) {}
   rpc Create1(CreateReq) returns (CreateRes) {}
 }
 
