@@ -4,12 +4,14 @@ package order;
 
 option go_package = "github.com/jianglianggithub/proto/api/order";
 
+import "base/common.proto";
 
 service OrderInfo{
   rpc Create1(CreateReq) returns (CreateRes) {}
 }
 
 message CreateReq {
+  base.BaseReq a = 5;
   string Passport = 1; // v: required
   string Password = 2; // v: required
   string Nickname = 3; // v: required

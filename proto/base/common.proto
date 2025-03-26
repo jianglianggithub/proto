@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package base;
+
+option go_package = "github.com/jianglianggithub/proto/api/base";
+
+
+
+message BaseReq {
+  string PageNo = 1;
+  string PageSize = 2;
+}
